@@ -1,18 +1,14 @@
 <template>
-  <div class="app">App</div>
-  <RouterLink to="/home">home</RouterLink>
-  <RouterLink to="/login">login</RouterLink>
-  <RouterView></RouterView>
-  <el-row class="mb-4">
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-  </el-row>
+  <div class="app">
+    <RouterView></RouterView>
+  </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped>
+.app {
+  min-height: 100vh;
+  background-color: #E8E8E8;
+}
+</style>
