@@ -10,10 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import PageHeader from "@/components/page-header/page-header.vue";
-import CenterArea from "./cpns/center-area.vue";
-import LeftRanking from "./cpns/left-ranking.vue";
-import RightArea from "./cpns/right-area.vue";
+import PageHeader from '@/components/page-header/page-header.vue'
+import CenterArea from './cpns/center-area.vue'
+import LeftRanking from './cpns/left-ranking.vue'
+import RightArea from './cpns/right-area.vue'
 </script>
 
 <style scoped lang="less">
@@ -23,6 +23,5 @@ import RightArea from "./cpns/right-area.vue";
   display: flex;
   justify-content: space-between;
   position: relative;
-
 }
 </style>
