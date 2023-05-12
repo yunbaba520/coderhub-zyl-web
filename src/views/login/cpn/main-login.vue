@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import type { ILoginAccount } from '@/types/login/login'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
@@ -60,7 +60,7 @@ const isRemember = ref<boolean>(
 const loginStore = useLogin()
 const formRef = ref<FormInstance>()
 function handlerSubmit() {
-  formRef.value?.validate((valid, fields) => {
+  formRef.value?.validate((valid) => {
     if (valid) {
       const name = accountForm.name
       const password = accountForm.password
@@ -68,7 +68,7 @@ function handlerSubmit() {
       loginStore.loginAction({ name, password }).then(() => {
         // 表示登录成功
         // 记住账号密码
-        if (isRemember) {
+        if (isRemember.value) {
           // 记住密码
           localCache.setCache('login/name', name)
           localCache.setCache('login/password', password)
@@ -91,16 +91,17 @@ function handlerSubmit() {
 .main-login {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 80%;
   transform: translate(-50%, -50%);
   width: 350px;
   height: 350px;
   padding: 20px;
-  border-radius: 50%;
-  background-color: #104e8b;
+  border-radius: 10px;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
   .login-wrap {
     width: 250px;
     .password-status {
