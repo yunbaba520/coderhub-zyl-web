@@ -17,6 +17,6 @@ homeStore.getMomentListAction(params)
 .center-area {
   width: 600px;
   height: 2000px;
-  background-color: rgb(97, 141, 124);
+  background-color: var(--theme_center_bg_color);
 }
 </style>

@@ -9,6 +9,6 @@
 <style lang="less" scoped>
 .app {
   min-height: 100vh;
-  background-color: #E8E8E8;
+  background-color: var(--theme_app_bg_color);
 }
 </style>
