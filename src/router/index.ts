@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { localCache } from '@/utils/cache'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -21,5 +22,14 @@ const router = createRouter({
     }
   ]
 })
-
+router.beforeEach((to, from) => {
+  //跳转非login页面需要判断是否登录
+  if (to.path !== '/login') {
+    if (localCache.getCache('login/token')) {
+      return true
+    } else {
+      return '/login'
+    }
+  }
+})
 export default router

@@ -18,7 +18,12 @@
         <el-checkbox v-model="isRemember" label="记住密码" size="large" />
         <el-link type="primary">忘记密码</el-link>
       </div>
-      <el-button type="primary" class="login-btn" @click="handlerSubmit">
+      <el-button
+        type="primary"
+        :loading="isLoading"
+        class="login-btn"
+        @click="handlerSubmit"
+      >
         登录
       </el-button>
     </div>
@@ -57,30 +62,38 @@ const isRemember = ref<boolean>(
   localCache.getCache('login/isRemember') ?? false
 )
 // 登录逻辑
+const isLoading = ref<boolean>(false)
 const loginStore = useLogin()
 const formRef = ref<FormInstance>()
 function handlerSubmit() {
+  isLoading.value = true
   formRef.value?.validate((valid) => {
     if (valid) {
       const name = accountForm.name
       const password = accountForm.password
       // 进行登录逻辑
-      loginStore.loginAction({ name, password }).then(() => {
-        // 表示登录成功
-        // 记住账号密码
-        if (isRemember.value) {
-          // 记住密码
-          localCache.setCache('login/name', name)
-          localCache.setCache('login/password', password)
-          localCache.setCache('login/isRemember', isRemember)
-        } else {
-          // 不记住密码
-          localCache.removeCache('login/name')
-          localCache.removeCache('login/password')
-          localCache.removeCache('login/isRemember')
-        }
-      })
+      loginStore
+        .loginAction({ name, password })
+        .then(() => {
+          // 表示登录成功
+          // 记住账号密码
+          if (isRemember.value) {
+            // 记住密码
+            localCache.setCache('login/name', name)
+            localCache.setCache('login/password', password)
+            localCache.setCache('login/isRemember', isRemember.value)
+          } else {
+            // 不记住密码
+            localCache.removeCache('login/name')
+            localCache.removeCache('login/password')
+            localCache.removeCache('login/isRemember')
+          }
+        })
+        .finally(() => {
+          isLoading.value = false
+        })
     } else {
+      isLoading.value = false
       ElMessage.error('请规范填写账号密码~')
     }
   })
